@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		751AD7E22D365BFE008713BA /* SignleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751AD7E12D365BFE008713BA /* SignleImageViewController.swift */; };
 		75D0078E2D1584B100E84EB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0078D2D1584B100E84EB9 /* AppDelegate.swift */; };
 		75D007902D1584B100E84EB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D0078F2D1584B100E84EB9 /* SceneDelegate.swift */; };
 		75D007922D1584B100E84EB9 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D007912D1584B100E84EB9 /* ImageListViewController.swift */; };
@@ -14,9 +15,11 @@
 		75D0079A2D1584B200E84EB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D007982D1584B200E84EB9 /* LaunchScreen.storyboard */; };
 		75D007C22D19EFBD00E84EB9 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D007C12D19EFBD00E84EB9 /* ImagesListCell.swift */; };
 		75D007C52D1F3AFB00E84EB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D007C42D1F3AFB00E84EB9 /* Assets.xcassets */; };
+		75D007C72D2321B500E84EB9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D007C62D2321B500E84EB9 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		751AD7E12D365BFE008713BA /* SignleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignleImageViewController.swift; sourceTree = "<group>"; };
 		75D0078A2D1584B100E84EB9 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D0078D2D1584B100E84EB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75D0078F2D1584B100E84EB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		75D0079B2D1584B200E84EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D007C12D19EFBD00E84EB9 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		75D007C42D1F3AFB00E84EB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ImageFeed/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		75D007C62D2321B500E84EB9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 			children = (
 				75D007912D1584B100E84EB9 /* ImageListViewController.swift */,
 				75D007C12D19EFBD00E84EB9 /* ImagesListCell.swift */,
+				75D007C62D2321B500E84EB9 /* ProfileViewController.swift */,
+				751AD7E12D365BFE008713BA /* SignleImageViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -151,6 +157,8 @@
 			files = (
 				75D007922D1584B100E84EB9 /* ImageListViewController.swift in Sources */,
 				75D007C22D19EFBD00E84EB9 /* ImagesListCell.swift in Sources */,
+				751AD7E22D365BFE008713BA /* SignleImageViewController.swift in Sources */,
+				75D007C72D2321B500E84EB9 /* ProfileViewController.swift in Sources */,
 				75D0078E2D1584B100E84EB9 /* AppDelegate.swift in Sources */,
 				75D007902D1584B100E84EB9 /* SceneDelegate.swift in Sources */,
 			);
