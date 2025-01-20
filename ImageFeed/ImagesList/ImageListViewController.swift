@@ -23,7 +23,6 @@ private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
         tableView.delegate = self
         tableView.dataSource  = self
         tableView.rowHeight = 200
@@ -39,8 +38,7 @@ private let showSingleImageSegueIdentifier = "ShowSingleImage"
                 return
             }
             let image = UIImage(named: photosName[indexPath.row])
-            _ = viewController.view
-            viewController.imageView.image = image
+            viewController.image = image
         } else {
             super.prepare(for: segue, sender: sender)
         }
