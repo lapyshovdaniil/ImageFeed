@@ -17,8 +17,7 @@ final class SignleImageViewController: UIViewController {
     }
     
     @IBAction func didTapShareButton(_ sender: UIButton) {
-        print("hi")
-        guard let image else { print("1")
+        guard let image else {
             return }
         let activiryViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activiryViewController, animated: true, completion: nil)
