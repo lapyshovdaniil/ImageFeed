@@ -7,7 +7,7 @@
 
 import UIKit
 final class ProfileViewController: UIViewController {
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +18,7 @@ final class ProfileViewController: UIViewController {
         profilImage.clipsToBounds = true
         view.addSubview(profilImage)
         profilImage.translatesAutoresizingMaskIntoConstraints = false
-       
+        
         // EXITBUTTON
         let exitButtom = UIButton()
         exitButtom.setImage(UIImage(named: "Exit"), for: .normal)
@@ -56,6 +56,5 @@ final class ProfileViewController: UIViewController {
         view.addSubview(stackViewLable)
         
         NSLayoutConstraint.activate([stackViewLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16), stackViewLable.topAnchor.constraint(equalTo: profilImage.bottomAnchor, constant: 8)])
-        
     }
 }

@@ -7,7 +7,8 @@
 
 import UIKit
 final class SignleImageViewController: UIViewController {
-   var image: UIImage? {
+    
+    var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
             imageView.image = image
@@ -60,30 +61,30 @@ final class SignleImageViewController: UIViewController {
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
-
+    
 }
 extension SignleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-       return imageView
+        return imageView
     }
-  /*  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollView.setContentOffset(.zero, animated: true)
-    }
-   */
+    /*  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+     scrollView.setContentOffset(.zero, animated: true)
+     }
+     */
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-          guard let view else { return }
-          
-          let visibleRectSize = scrollView.bounds.size
-          let realSize = view.frame.size
-          
-          let horizontalInset = max(0, (visibleRectSize.width - realSize.width) / 2)
-          let verticalInset = max(0, (visibleRectSize.height - realSize.height) / 2)
-          
-          scrollView.contentInset = UIEdgeInsets(
-              top: verticalInset,
-              left: horizontalInset,
-              bottom: verticalInset,
-              right: horizontalInset)
-      }
+        guard let view else { return }
+        
+        let visibleRectSize = scrollView.bounds.size
+        let realSize = view.frame.size
+        
+        let horizontalInset = max(0, (visibleRectSize.width - realSize.width) / 2)
+        let verticalInset = max(0, (visibleRectSize.height - realSize.height) / 2)
+        
+        scrollView.contentInset = UIEdgeInsets(
+            top: verticalInset,
+            left: horizontalInset,
+            bottom: verticalInset,
+            right: horizontalInset)
+    }
 }
 

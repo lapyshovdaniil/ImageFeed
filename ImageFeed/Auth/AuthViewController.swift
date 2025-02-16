@@ -10,16 +10,16 @@ import UIKit
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController)
 }
-final class AuthViewController: UIViewController{
-    let tokenLoader = TokenLoader()
+
+final class AuthViewController: UIViewController {
     
+    private let oauth2Service = OAuth2Service.shared
     
     private let showWebViewSegueIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackButton()
-        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowWebView" {
@@ -45,29 +45,29 @@ extension AuthViewController: WebViewViewControllerDelegate {
         vc.dismiss(animated: true)
     }
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        tokenLoader.fetchOAuthToken(code: code) { [weak self] result in
+        oauth2Service.fetch(code: code) { [weak self] result in
             switch result {
             case .success(let token):
                 DispatchQueue.main.async {
+                    guard let self = self else { return }
                     vc.dismiss(animated: true) {
-                        self?.delegate?.didAuthenticate(self!)
+                        self.delegate?.didAuthenticate(self)
                     }
                 }
-                
             case .failure(let error):
                 print("Ошибка авторизации: \(error.localizedDescription)")
-                self?.showAuthErrorAlert()
+                self?.showErrorAlert()
             }
         }
     }
-    private func showAuthErrorAlert() {
-            let alert = UIAlertController(
-                title: "Упс!",
-                message: "Что-то пошло не так. Попробуйте повторить авторизацию",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "ЧТОЖ", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
+    private func showErrorAlert(){
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: "Попробуйте повторить авторизацию",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ошибка", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
+}
 

@@ -16,6 +16,7 @@ protocol WebViewViewControllerDelegate: AnyObject{
 }
 
 final class WebViewViewController: UIViewController {
+    private let storage = OAuth2TokenStorage()
     
     weak var delegate: WebViewViewControllerDelegate?
     
@@ -44,10 +45,10 @@ final class WebViewViewController: UIViewController {
         webView.load(request)
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         updateProgress()
+        
     }
     override func viewDidDisappear(_ animated: Bool) {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
@@ -80,17 +81,17 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
     private func code(from navigationAction: WKNavigationAction) -> String?{
-            print("code")
-            if
-                let url = navigationAction.request.url,
-                let urlComponents = URLComponents(string: url.absoluteString),
-                urlComponents.path == "/oauth/authorize/native",
-                let items = urlComponents.queryItems,
-                let codeItem = items.first(where: { $0.name == "code" })
-            {
-                return codeItem.value
-            } else {
-                return nil
-            }
+        print("code")
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code" })
+        {
+            return codeItem.value
+        } else {
+            return nil
         }
+    }
 }
