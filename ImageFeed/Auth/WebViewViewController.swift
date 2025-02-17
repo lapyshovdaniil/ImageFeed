@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-fileprivate let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+
 
 protocol WebViewViewControllerDelegate: AnyObject{
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
@@ -16,7 +16,7 @@ protocol WebViewViewControllerDelegate: AnyObject{
 }
 
 final class WebViewViewController: UIViewController {
-    private let storage = OAuth2TokenStorage()
+    
     
     weak var delegate: WebViewViewControllerDelegate?
     
@@ -30,7 +30,7 @@ final class WebViewViewController: UIViewController {
         loadAuthView()
     }
     private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: unsplashAuthorizeURLString) else {
+        guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {
             return
         }
         urlComponents.queryItems = [
@@ -80,8 +80,7 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-    private func code(from navigationAction: WKNavigationAction) -> String?{
-        print("code")
+    private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),

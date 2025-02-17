@@ -14,7 +14,7 @@ final class OAuth2Service {
     
     private let tokenStorage = OAuth2TokenStorage()
     
-    func makeOAuthTokenRequest(code: String) -> URLRequest? {
+    private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseUrl = URL(string: "https://unsplash.com/oauth/token") else {
             print("Invalid URL")
             return nil
@@ -33,7 +33,7 @@ final class OAuth2Service {
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         guard let httpBody = urlComponents.query?.data(using: .utf8) else {
-            
+            print("Ошибка при преобразовании URLComponents")
             return nil
         }
         request.httpBody = httpBody
@@ -52,17 +52,18 @@ final class OAuth2Service {
                     let response = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
                     print("Получен Bearer токен: \(response.accessToken)")
                     self.tokenStorage.token = response.accessToken
-                    DispatchQueue.main.async {
-                        completion(.success(response.accessToken))
-                    }
+                    
+                    completion(.success(response.accessToken))
+                    
                 } catch {
-                    DispatchQueue.main.async {
-                        completion(.failure(NSError(domain: "OAuth2Service", code: 2, userInfo: [NSLocalizedDescriptionKey: "Ошибка JSON"])))
-                    }
+                    completion(.failure(NSError(domain: "OAuth2Service", code: 2, userInfo: [NSLocalizedDescriptionKey: "Ошибка JSON"])))
+                    
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
+                    print("Ошибка! Неудалось получить токен: \(error)")
                     completion(.failure(error))
+                    
                 }
             }
         }

@@ -13,7 +13,7 @@ final class ProfileViewController: UIViewController {
         
         // PROFILEIMAGE
         let profilImage = UIImageView()
-        profilImage.image = UIImage(named: "Avatar")
+        profilImage.image = UIImage(named: "avatar")
         profilImage.layer.cornerRadius = 35
         profilImage.clipsToBounds = true
         view.addSubview(profilImage)
@@ -26,7 +26,16 @@ final class ProfileViewController: UIViewController {
         exitButtom.translatesAutoresizingMaskIntoConstraints = false
         
         
-        NSLayoutConstraint.activate([profilImage.heightAnchor.constraint(equalToConstant: 70) ,profilImage.widthAnchor.constraint(equalToConstant: 70), profilImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16), profilImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32), exitButtom.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 24),exitButtom.centerYAnchor.constraint(equalTo: profilImage.centerYAnchor), exitButtom.leadingAnchor.constraint(equalTo: profilImage.trailingAnchor, constant: 241)])
+        NSLayoutConstraint.activate([
+            profilImage.heightAnchor.constraint(equalToConstant: 70),
+            profilImage.widthAnchor.constraint(equalToConstant: 70),
+            profilImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            profilImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            
+            exitButtom.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 24),
+            exitButtom.centerYAnchor.constraint(equalTo: profilImage.centerYAnchor),
+            exitButtom.leadingAnchor.constraint(equalTo: profilImage.trailingAnchor, constant: 241)
+        ])
         
         // FULLLABLE
         let fullNameLable = UILabel()
