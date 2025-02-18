@@ -7,8 +7,14 @@
 
 import UIKit
 final class ImagesListCell: UITableViewCell {
+    
+    // MARK: - @IBOutlet properties
+    
     @IBOutlet weak var imageCell: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    // MARK: - Static properties
+    
     static let reuseIdentifier = "ImagesListCell"
 }

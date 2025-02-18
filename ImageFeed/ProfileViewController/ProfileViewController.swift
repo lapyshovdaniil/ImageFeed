@@ -11,7 +11,8 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // PROFILEIMAGE
+        // MARK: - PROFILEIMAGE
+
         let profilImage = UIImageView()
         profilImage.image = UIImage(named: "avatar")
         profilImage.layer.cornerRadius = 35
@@ -19,7 +20,8 @@ final class ProfileViewController: UIViewController {
         view.addSubview(profilImage)
         profilImage.translatesAutoresizingMaskIntoConstraints = false
         
-        // EXITBUTTON
+        // MARK: - EXITBUTTON
+        
         let exitButtom = UIButton()
         exitButtom.setImage(UIImage(named: "Exit"), for: .normal)
         view.addSubview(exitButtom)
@@ -37,25 +39,28 @@ final class ProfileViewController: UIViewController {
             exitButtom.leadingAnchor.constraint(equalTo: profilImage.trailingAnchor, constant: 241)
         ])
         
-        // FULLLABLE
+        // MARK: - FULLLABLE
+        
         let fullNameLable = UILabel()
         fullNameLable.text = "Екатерина Новикова"
         fullNameLable.font = UIFont.boldSystemFont(ofSize: 23)
         fullNameLable.textColor = .white
         
-        //NICKNAMELABLE
+        // MARK: - NICKNAMELABLE
         let nikNameLable = UILabel()
         nikNameLable.text = "@ekaterina_nov"
         nikNameLable.font = UIFont.systemFont(ofSize: 13)
         nikNameLable.textColor = .gray
         
-        //BIOLABLE
+        // MARK: - NICKNAMELABLE
+        
         let bioLable = UILabel()
         bioLable.text = "Hello, world!"
         bioLable.font = UIFont.systemFont(ofSize: 13)
         bioLable.textColor = .white
         
-        //STACKLABLE
+        // MARK: - STACKLABLE
+        
         let stackViewLable = UIStackView(arrangedSubviews: [fullNameLable, nikNameLable, bioLable])
         stackViewLable.axis = .vertical
         stackViewLable.spacing = 8

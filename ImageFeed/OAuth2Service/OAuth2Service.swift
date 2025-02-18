@@ -49,6 +49,8 @@ final class OAuth2Service {
             switch result {
             case .success(let data):
                 do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let response = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
                     print("Получен Bearer токен: \(response.accessToken)")
                     self.tokenStorage.token = response.accessToken
@@ -60,11 +62,8 @@ final class OAuth2Service {
                     
                 }
             case .failure(let error):
-                DispatchQueue.main.async {
                     print("Ошибка! Неудалось получить токен: \(error)")
                     completion(.failure(error))
-                    
-                }
             }
         }
         task.resume()

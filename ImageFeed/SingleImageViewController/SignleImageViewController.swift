@@ -17,19 +17,22 @@ final class SignleImageViewController: UIViewController {
         }
     }
     
+    // MARK: - @IBAction properties
+    
     @IBAction func didTapShareButton(_ sender: UIButton) {
         guard let image else {
             return }
         let activiryViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activiryViewController, animated: true, completion: nil)
     }
-    
-    @IBOutlet weak var didTapShareButton: UIButton!
     @IBAction func didTapBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @IBOutlet weak var tapBackButton: UIButton!
     
+    // MARK: - @IBOutlet properties
+    
+    @IBOutlet weak var tapBackButton: UIButton!
+    @IBOutlet weak var didTapShareButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     

@@ -8,8 +8,6 @@
 import UIKit
 import WebKit
 
-
-
 protocol WebViewViewControllerDelegate: AnyObject{
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
@@ -20,6 +18,7 @@ final class WebViewViewController: UIViewController {
     
     weak var delegate: WebViewViewControllerDelegate?
     
+    // MARK: - @IBOutlet properties
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet private var webView: WKWebView!
@@ -39,7 +38,10 @@ final class WebViewViewController: UIViewController {
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
-        let url = urlComponents.url!
+        guard let url = urlComponents.url else {
+            print("Ошибка при создание URL")
+            return
+        }
         let request = URLRequest(url: url)
         print(request)
         webView.load(request)
