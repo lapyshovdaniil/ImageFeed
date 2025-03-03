@@ -8,11 +8,29 @@
 import UIKit
 final class ProfileViewController: UIViewController {
     
+    private let tokenStorage = OAuth2TokenStorage()
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    
+    
+    private let fullNameLable = UILabel()
+    private let nikNameLable = UILabel()
+    private let bioLable = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let profile = ProfileService.shared.profile else {
+            return
+        }
+        updateUI(with: profile)
         
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
         // MARK: - PROFILEIMAGE
-
+        
         let profilImage = UIImageView()
         profilImage.image = UIImage(named: "avatar")
         profilImage.layer.cornerRadius = 35
@@ -41,21 +59,21 @@ final class ProfileViewController: UIViewController {
         
         // MARK: - FULLLABLE
         
-        let fullNameLable = UILabel()
-        fullNameLable.text = "Екатерина Новикова"
+
+//        fullNameLable.text = "Екатерина Новикова"
         fullNameLable.font = UIFont.boldSystemFont(ofSize: 23)
         fullNameLable.textColor = .white
         
         // MARK: - NICKNAMELABLE
-        let nikNameLable = UILabel()
-        nikNameLable.text = "@ekaterina_nov"
+
+//        nikNameLable.text = "@ekaterina_nov"
         nikNameLable.font = UIFont.systemFont(ofSize: 13)
         nikNameLable.textColor = .gray
         
         // MARK: - NICKNAMELABLE
         
-        let bioLable = UILabel()
-        bioLable.text = "Hello, world!"
+
+//        bioLable.text = "Hello, world!"
         bioLable.font = UIFont.systemFont(ofSize: 13)
         bioLable.textColor = .white
         
@@ -70,5 +88,16 @@ final class ProfileViewController: UIViewController {
         view.addSubview(stackViewLable)
         
         NSLayoutConstraint.activate([stackViewLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16), stackViewLable.topAnchor.constraint(equalTo: profilImage.bottomAnchor, constant: 8)])
+    }
+    private func updateUI(with profile: ProfileModel) {
+        fullNameLable.text = profile.name
+        nikNameLable.text = profile.loginName
+        bioLable.text = profile.bio
+     }
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
     }
 }

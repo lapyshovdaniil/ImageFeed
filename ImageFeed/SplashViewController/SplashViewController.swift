@@ -11,25 +11,52 @@ import UIKit
 final class SplashViewController: UIViewController {
     
     private let storage = OAuth2TokenStorage()
+    
     private let oAuth2Service = OAuth2Service.shared
+    private let profileService = ProfileService.shared
+    
     private let showAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
     
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        if storage.token != nil {
-            switchToTabBarController()
-        } else {
+        guard let token = storage.token else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            return
         }
+        switchToTabBarController()
+        fetchProfile(token)
     }
+    
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
+    private func fetchProfile(_ token: String) {
+        UIBlockingProgressHUD.show()
+        profileService.fetchProfile(code: token) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+           
+          
+            guard let self = self else { return }
+            guard let username = profileService.profile?.loginName else {
+                return
+            }
+            ProfileImageService.shared.fetсhImageURL(username: username) { _ in}
+            switch result {
+            case .success:
+               self.switchToTabBarController()
+
+            case .failure:
+                // TODO [Sprint 11] Покажите ошибку получения профиля
+                break
+            }
+        }
+    }
 }
+
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showAuthenticationScreenSegueIdentifier {
@@ -43,10 +70,14 @@ extension SplashViewController {
         }
     }
 }
-extension SplashViewController: AuthViewControllerDelegate{
+extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
-        switchToTabBarController()
+       
+        guard let token = storage.token else {
+            return
+        }
+        fetchProfile(token)
     }
     
     

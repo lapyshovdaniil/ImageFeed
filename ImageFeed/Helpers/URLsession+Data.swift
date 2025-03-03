@@ -44,5 +44,20 @@ extension URLSession {
     }
     
 }
-
+//extension URLSession {
+//    func objectTask<T: Decodable>(
+//        for request: URLRequest,
+//        completion: @escaping (Result<T, Error>) -> Void
+//    ) -> URLSessionTask {
+//        let decoder = JSONDecoder()
+//        let task = data(for: request) { (result: Result<Data, Error>) in
+//            
+//            
+//            
+//            
+//            // TODO [Sprint 11] Напишите реализацию c декодированием Data в тип T
+//        }
+//        return task
+//    }
+//}
 
