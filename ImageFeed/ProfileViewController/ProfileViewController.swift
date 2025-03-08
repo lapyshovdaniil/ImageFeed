@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
+
 final class ProfileViewController: UIViewController {
     
-    private let tokenStorage = OAuth2TokenStorage()
+//    private let tokenStorage = OAuth2TokenStorage()
     private var profileImageServiceObserver: NSObjectProtocol?
     
     
@@ -16,6 +18,7 @@ final class ProfileViewController: UIViewController {
     private let fullNameLable = UILabel()
     private let nikNameLable = UILabel()
     private let bioLable = UILabel()
+    private let profilImage = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +34,8 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
         // MARK: - PROFILEIMAGE
         
-        let profilImage = UIImageView()
-        profilImage.image = UIImage(named: "avatar")
+
+//        profilImage.image = UIImage(named: "avatar")
         profilImage.layer.cornerRadius = 35
         profilImage.clipsToBounds = true
         view.addSubview(profilImage)
@@ -96,8 +99,9 @@ final class ProfileViewController: UIViewController {
      }
     private func updateAvatar() {
         guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
+            let profileImageURL = ProfileImageService.shared.avatarURL
         else { return }
+        let imageURL = URL(string: profileImageURL)
+        profilImage.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
     }
 }

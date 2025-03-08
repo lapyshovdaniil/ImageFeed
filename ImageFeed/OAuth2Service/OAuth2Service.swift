@@ -70,23 +70,17 @@ final class OAuth2Service {
             completion(.failure(NSError(domain: "OAuth2Service", code: 1, userInfo: [NSLocalizedDescriptionKey: "Запрос не сформирован"])))
             return
         }
-        let task = URLSession.shared.data(for: request) { result in
+        let task = URLSession.shared.objectTask(for: request) { (result: Result<OAuthTokenResponseBody, Error>) in
           
             switch result {
             case .success(let data):
-                do {
+
 //                    let decoder = JSONDecoder()
 //                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let response = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    print("Получен Bearer токен: \(response.accessToken)")
-                    self.tokenStorage.token = response.accessToken
-                    
-                    completion(.success(response.accessToken))
-                    
-                } catch {
-                    completion(.failure(NSError(domain: "OAuth2Service", code: 2, userInfo: [NSLocalizedDescriptionKey: "Ошибка JSON"])))
-                    
-                }
+                    print("Получен Bearer токен: \(data.accessToken)")
+                self.tokenStorage.saveBearerToken(token: data.accessToken)
+//                               self.tokenStorage.token = data.accessToken
+                               completion(.success(data.accessToken))
             case .failure(let error):
                     print("Ошибка! Неудалось получить токен: \(error)")
                     completion(.failure(error))

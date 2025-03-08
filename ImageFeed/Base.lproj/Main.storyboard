@@ -186,6 +186,7 @@
                                                     </constraints>
                                                     <buttonConfiguration key="configuration" style="plain" image="Like_OFF"/>
                                                     <connections>
+                                                        <action selector="Like:" destination="9Cc-gw-MMj" eventType="touchUpInside" id="QdY-bU-Gae"/>
                                                         <action selector="isLikeButton:" destination="9Cc-gw-MMj" eventType="touchUpInside" id="XfC-c5-zLm"/>
                                                     </connections>
                                                 </button>

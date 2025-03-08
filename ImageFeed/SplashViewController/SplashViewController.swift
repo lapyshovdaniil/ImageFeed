@@ -14,13 +14,17 @@ final class SplashViewController: UIViewController {
     
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
+
+    //
+    private let profileImageService = ProfileImageService.shared
+    //
     
     private let showAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
     
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        guard let token = storage.token else {
+        guard let token = storage.getBearerToken() else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
             return
         }
@@ -36,25 +40,44 @@ final class SplashViewController: UIViewController {
     }
     private func fetchProfile(_ token: String) {
         UIBlockingProgressHUD.show()
-        profileService.fetchProfile(code: token) { [weak self] result in
+        
+        profileService.fetchProfile(code: token) { result in
             UIBlockingProgressHUD.dismiss()
-           
-          
-            guard let self = self else { return }
-            guard let username = profileService.profile?.loginName else {
-                return
-            }
-            ProfileImageService.shared.fetсhImageURL(username: username) { _ in}
             switch result {
-            case .success:
-               self.switchToTabBarController()
-
-            case .failure:
-                // TODO [Sprint 11] Покажите ошибку получения профиля
-                break
+            case .success(let profile):
+                self.switchToTabBarController()
+                
+                // 🔍 Проверяем, что profile в сервисе обновился
+                guard ProfileService.shared.profile != nil else {
+                    print("❌ Данные профиля не загружаются")
+                    return
+                }
+                
+                print("✅ Профиль успешно загружен: \(profile.userName)")
+                self.fetchProfileImage(username: profile.userName)
+                
+            case .failure(let error):
+                print("❌ Ошибка загрузки профиля: \(error.localizedDescription)")
             }
         }
     }
+    private func fetchProfileImage(username: String) {
+        profileImageService.fetсhImageURL(username: username) { result in
+            switch result {
+            case .success(let image):
+                guard ProfileImageService.shared.avatarURL != nil else {
+                    return
+                }
+                print("✅ аватар успешно загружен: \(ProfileImageService.shared.avatarURL)")
+                
+            case .failure(let error):
+                print("❌ Ошибка загрузки аватара: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
 }
 
 extension SplashViewController {
@@ -74,7 +97,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true)
        
-        guard let token = storage.token else {
+        guard let token = storage.getBearerToken() else {
             return
         }
         fetchProfile(token)

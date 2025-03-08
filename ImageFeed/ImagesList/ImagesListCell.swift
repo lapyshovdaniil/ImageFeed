@@ -7,7 +7,7 @@
 
 import UIKit
 final class ImagesListCell: UITableViewCell {
-    
+
     // MARK: - @IBOutlet properties
     
     @IBOutlet weak var imageCell: UIImageView!
@@ -16,5 +16,8 @@ final class ImagesListCell: UITableViewCell {
     
     // MARK: - Static properties
     
+    @IBAction func Like(_ sender: Any) {
+        print("выход")
+    }
     static let reuseIdentifier = "ImagesListCell"
 }

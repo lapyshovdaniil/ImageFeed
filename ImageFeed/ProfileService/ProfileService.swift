@@ -36,22 +36,14 @@ final class ProfileService {
             completion(.failure(NSError(domain: "ProfileService", code: 1, userInfo: [NSLocalizedDescriptionKey : "Запрос не сформирован"])))
             return
         }
-        let task = URLSession.shared.data(for: request) { result in
+        let task = URLSession.shared.objectTask(for: request) { (result: Result<ProfileResult, Error>) in
           
             switch result {
             case .success(let data):
-                do {
-//                    let decoder = JSONDecoder()
-//                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let response = try JSONDecoder().decode(ProfileResult.self, from: data)
-                    completion(.success(response))
-                    let profileModel = ProfileModel(from: response)
+                    let profileModel = ProfileModel(from: data)
                     self.updateProfileDetails(newProfile: profileModel)
-                    
-                } catch {
-                    completion(.failure(NSError(domain: "ProfileService", code: 2, userInfo: [NSLocalizedDescriptionKey: "Ошибка JSON"])))
-                    
-                }
+                    completion(.success(data))
+
             case .failure(let error):
                     print("Ошибка! Неудалось получить данные: \(error)")
                     completion(.failure(error))
