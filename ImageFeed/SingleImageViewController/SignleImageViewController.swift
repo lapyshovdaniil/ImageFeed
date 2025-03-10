@@ -6,8 +6,9 @@
 //
 
 import UIKit
+
 final class SignleImageViewController: UIViewController {
-    
+
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
@@ -16,26 +17,28 @@ final class SignleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
-    
+
     // MARK: - @IBAction properties
-    
+
     @IBAction func didTapShareButton(_ sender: UIButton) {
         guard let image else {
-            return }
-        let activiryViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            return
+        }
+        let activiryViewController = UIActivityViewController(
+            activityItems: [image], applicationActivities: nil)
         present(activiryViewController, animated: true, completion: nil)
     }
     @IBAction func didTapBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     // MARK: - @IBOutlet properties
-    
+
     @IBOutlet weak var tapBackButton: UIButton!
     @IBOutlet weak var didTapShareButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         didTapShareButton.setTitle("", for: .normal)
@@ -47,7 +50,7 @@ final class SignleImageViewController: UIViewController {
         imageView.frame.size = image.size
         rescaleAndCenterImageInScrollView(image: image)
     }
-    
+
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
@@ -64,7 +67,7 @@ final class SignleImageViewController: UIViewController {
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
-    
+
 }
 extension SignleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -74,15 +77,19 @@ extension SignleImageViewController: UIScrollViewDelegate {
      scrollView.setContentOffset(.zero, animated: true)
      }
      */
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    func scrollViewDidEndZooming(
+        _ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat
+    ) {
         guard let view else { return }
-        
+
         let visibleRectSize = scrollView.bounds.size
         let realSize = view.frame.size
-        
-        let horizontalInset = max(0, (visibleRectSize.width - realSize.width) / 2)
-        let verticalInset = max(0, (visibleRectSize.height - realSize.height) / 2)
-        
+
+        let horizontalInset = max(
+            0, (visibleRectSize.width - realSize.width) / 2)
+        let verticalInset = max(
+            0, (visibleRectSize.height - realSize.height) / 2)
+
         scrollView.contentInset = UIEdgeInsets(
             top: verticalInset,
             left: horizontalInset,
@@ -90,4 +97,3 @@ extension SignleImageViewController: UIScrollViewDelegate {
             right: horizontalInset)
     }
 }
-
