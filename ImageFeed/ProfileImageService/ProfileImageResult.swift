@@ -8,10 +8,10 @@ import Foundation
 
 struct ProfileImageResult: Decodable {
     struct ProfileImage: Decodable {
-        let small: String
+        let large: String
         
         enum CodingKeys: String, CodingKey {
-            case small
+            case large
         }
     }
     

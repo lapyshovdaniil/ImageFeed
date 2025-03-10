@@ -33,6 +33,7 @@
 		75DDCB6F2D72EF6F00AFCDBF /* ProfileImageResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DDCB6E2D72EF6200AFCDBF /* ProfileImageResult.swift */; };
 		75DDCB722D79BB7900AFCDBF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 75DDCB712D79BB7900AFCDBF /* Kingfisher */; };
 		75DDCB752D79E11C00AFCDBF /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 75DDCB742D79E11C00AFCDBF /* SwiftKeychainWrapper */; };
+		75DDCB772D7C34E100AFCDBF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DDCB762D7C34CC00AFCDBF /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		75DDCB692D6CC5BD00AFCDBF /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		75DDCB6C2D72EEB000AFCDBF /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		75DDCB6E2D72EF6200AFCDBF /* ProfileImageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageResult.swift; sourceTree = "<group>"; };
+		75DDCB762D7C34CC00AFCDBF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		75D0078C2D1584B100E84EB9 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				75DDCB762D7C34CC00AFCDBF /* TabBarController.swift */,
 				75DDCB6B2D72EE9A00AFCDBF /* ProfileImageService */,
 				75DDCB642D6CC38000AFCDBF /* ProfileService */,
 				75C7CC892D5D0FB500B397EB /* SingleImageViewController */,
@@ -290,6 +293,7 @@
 				75C7CC702D4D0BEB00B397EB /* AuthViewController.swift in Sources */,
 				75C7CC7E2D5786CB00B397EB /* OAuth2Service.swift in Sources */,
 				75C7CC7C2D5779CB00B397EB /* OAuth2TokenStorage.swift in Sources */,
+				75DDCB772D7C34E100AFCDBF /* TabBarController.swift in Sources */,
 				75DDCB6F2D72EF6F00AFCDBF /* ProfileImageResult.swift in Sources */,
 				75D007902D1584B100E84EB9 /* SceneDelegate.swift in Sources */,
 			);

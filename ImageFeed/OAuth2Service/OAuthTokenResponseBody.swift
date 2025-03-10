@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct OAuthTokenResponseBody: Decodable {
     let accessToken: String
     enum CodingKeys: String, CodingKey {

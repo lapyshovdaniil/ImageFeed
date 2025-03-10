@@ -55,7 +55,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="a8n-qP-ghT">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="JQo-zH-nw7" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="JQo-zH-nw7" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C9t-10-DGW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -65,30 +65,10 @@
                             <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="7LJ-4a-xxu"/>
-                        <segue destination="UXH-rt-waK" kind="relationship" relationship="viewControllers" id="8iu-J6-WgI"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXF-bq-eG7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1110.2803738317757" y="-271.49028077753781"/>
-        </scene>
-        <!--ProfileViewController-->
-        <scene sceneID="eo9-yL-bMj">
-            <objects>
-                <viewController title="ProfileViewController" id="UXH-rt-waK" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0BT-kV-l32">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="5Vp-bF-LEb"/>
-                        <color key="backgroundColor" red="0.10105843096971512" green="0.10604517906904221" blue="0.13579833507537842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="Active 4" id="Rsd-td-2gp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V50-P7-r4v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="79.906542056074755" y="4.5356371490280782"/>
         </scene>
         <!--AuthViewController-->
         <scene sceneID="gaW-iE-jiR">
@@ -147,13 +127,13 @@
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="ImageList" id="BYZ-38-t0r" customClass="ImageListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageListViewController" title="ImageList" id="BYZ-38-t0r" customClass="ImageListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JCI-B3-aIu">
-                                <rect key="frame" x="0.0" y="59" width="430" height="790"/>
+                                <rect key="frame" x="0.0" y="59" width="430" height="839"/>
                                 <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="173" id="9Cc-gw-MMj" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
@@ -374,7 +354,6 @@
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Active 3" width="30" height="30"/>
-        <image name="Active 4" width="30" height="30"/>
         <image name="Backward" width="24" height="24"/>
         <image name="Image" width="25" height="26"/>
         <image name="Like_OFF" width="42" height="42"/>

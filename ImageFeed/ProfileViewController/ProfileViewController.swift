@@ -10,7 +10,7 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-//    private let tokenStorage = OAuth2TokenStorage()
+
     private var profileImageServiceObserver: NSObjectProtocol?
     
     
@@ -20,7 +20,10 @@ final class ProfileViewController: UIViewController {
     private let bioLable = UILabel()
     private let profilImage = UIImageView()
     
+    private let removeData = OAuth2TokenStorage()
+    
     override func viewDidLoad() {
+        self.view.backgroundColor = .black
         super.viewDidLoad()
         guard let profile = ProfileService.shared.profile else {
             return
@@ -47,6 +50,8 @@ final class ProfileViewController: UIViewController {
         exitButtom.setImage(UIImage(named: "Exit"), for: .normal)
         view.addSubview(exitButtom)
         exitButtom.translatesAutoresizingMaskIntoConstraints = false
+        exitButtom.addTarget(
+                    self, action: #selector(exitButtonTapped), for: .touchUpInside)
         
         
         NSLayoutConstraint.activate([
@@ -104,4 +109,9 @@ final class ProfileViewController: UIViewController {
         let imageURL = URL(string: profileImageURL)
         profilImage.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeholder"))
     }
+    @objc
+        private func exitButtonTapped() {
+            removeData.removeBearerToken()
+            print("Logout")
+        }
 }

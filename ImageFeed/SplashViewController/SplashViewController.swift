@@ -24,14 +24,16 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
+        chektoken()
+    }
+    private func chektoken(){
+        print(storage.getBearerToken() ?? "Пусто")
         guard let token = storage.getBearerToken() else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
             return
         }
-        switchToTabBarController()
         fetchProfile(token)
     }
-    
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)

@@ -45,12 +45,12 @@ final class ProfileImageService {
         let task = URLSession.shared.objectTask(for: request) { (result: Result<ProfileImageResult, Error>) in
             switch result {
             case .success(let data):
-                    self.updateProfileDetails(newProfileImage: data.profileImage.small)
+                self.updateProfileDetails(newProfileImage: data.profileImage.large)
                     guard let avatarURL = self.avatarURL else {
                         return
                     }
                     NotificationCenter.default.post(name: ProfileImageService.didChangeNotification, object: self, userInfo: ["URL" : avatarURL])
-                    completion(.success(data.profileImage.small))
+                completion(.success(data.profileImage.large))
             case .failure(let error):
                     print("Ошибка! Неудалось получить данные: \(error)")
                     completion(.failure(error))
