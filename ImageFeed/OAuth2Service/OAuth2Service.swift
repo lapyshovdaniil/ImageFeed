@@ -85,9 +85,6 @@ final class OAuth2Service {
 
             switch result {
             case .success(let data):
-
-                //                    let decoder = JSONDecoder()
-                //                    decoder.keyDecodingStrategy = .convertFromSnakeCase
                 print("Получен Bearer токен: \(data.accessToken)")
                 self.tokenStorage.saveBearerToken(token: data.accessToken)
                 //                               self.tokenStorage.token = data.accessToken

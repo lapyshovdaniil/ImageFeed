@@ -72,12 +72,12 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
     private func showErrorAlert() {
         let alert = UIAlertController(
-            title: "Ошибка",
-            message: "Попробуйте повторить авторизацию",
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
             preferredStyle: .alert
         )
         alert.addAction(
-            UIAlertAction(title: "Ошибка", style: .default, handler: nil))
+            UIAlertAction(title: "Ок", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }

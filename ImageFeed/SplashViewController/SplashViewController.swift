@@ -14,7 +14,6 @@ enum IdentifierConstants {
 }
 
 final class SplashViewController: UIViewController {
-
     private let storage = OAuth2TokenStorage()
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
@@ -37,7 +36,6 @@ final class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
     }
 
@@ -88,7 +86,8 @@ final class SplashViewController: UIViewController {
 
     private func fetchProfile(_ token: String) {
         UIBlockingProgressHUD.show()
-        profileService.fetchProfile(code: token) { result in
+        profileService.fetchProfile(code: token) { [weak self] result in
+            guard let self else { return }
             UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let profile):
@@ -106,8 +105,10 @@ final class SplashViewController: UIViewController {
             }
         }
     }
+
     private func fetchProfileImage(username: String) {
-        profileImageService.fetсhImageURL(username: username) { result in
+        profileImageService.fetсhImageURL(username: username) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let image):
                 guard ProfileImageService.shared.avatarURL != nil else {
@@ -151,8 +152,7 @@ extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(
         _ vc: AuthViewController, didAuthenticateWithCode code: String
     ) {
-        vc.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
+        vc.dismiss(animated: true) {
             self.fethcAuthToken(code)
         }
     }

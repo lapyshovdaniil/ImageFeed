@@ -11,8 +11,8 @@ struct ProfileModel {
     let bio: String
     let loginName: String
     init(from profileResult: ProfileResult) {
-        self.name = "\(profileResult.firstName) \(profileResult.lastName)"
-        self.bio = profileResult.bio
+        self.name = "\(profileResult.firstName) \(profileResult.lastName ?? "")"
+        self.bio = profileResult.bio ?? ""
         self.loginName = profileResult.userName
     }
 }
