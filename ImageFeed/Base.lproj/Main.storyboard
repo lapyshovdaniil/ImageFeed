@@ -179,8 +179,7 @@
                                                     </constraints>
                                                     <buttonConfiguration key="configuration" style="plain" image="Like_OFF"/>
                                                     <connections>
-                                                        <action selector="Like:" destination="9Cc-gw-MMj" eventType="touchUpInside" id="QdY-bU-Gae"/>
-                                                        <action selector="isLikeButton:" destination="9Cc-gw-MMj" eventType="touchUpInside" id="XfC-c5-zLm"/>
+                                                        <action selector="likeButtonTap:" destination="9Cc-gw-MMj" eventType="touchUpInside" id="Pd0-Xx-AZx"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

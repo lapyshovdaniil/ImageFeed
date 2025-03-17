@@ -14,10 +14,12 @@ enum IdentifierConstants {
 }
 
 final class SplashViewController: UIViewController {
+    
     private let storage = OAuth2TokenStorage()
     private let oAuth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+//    private let imagesListService = ImagesListService()
 
     private lazy var launchImageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,6 +34,7 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         chektoken()
+//        fetchImageList()
     }
 
     override func viewDidLoad() {
@@ -124,6 +127,21 @@ final class SplashViewController: UIViewController {
             }
         }
     }
+    
+//    private func fetchImageList() {
+//        imagesListService.fetchPhotosNextPage() { [weak self] result in
+//            guard let self else { return }
+//            switch result {
+//            case .success(let image):
+//                print(
+//                    "Загрузка Фото произвелась"
+//                )
+//            case .failure(let error):
+//                print(
+//                    "Нет загрузки фото: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 }
 
 //extension SplashViewController {
