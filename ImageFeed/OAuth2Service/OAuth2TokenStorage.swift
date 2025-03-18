@@ -6,14 +6,26 @@
 //
 
 import Foundation
-final class OAuth2TokenStorage{
-    private let tokenKey = "BearerToken"
-    var token: String? {
-        get {
-            return UserDefaults.standard.string(forKey: tokenKey)
+import SwiftKeychainWrapper
+
+final class OAuth2TokenStorage {
+
+    func saveBearerToken(token: String) {
+        let isSucces = KeychainWrapper.standard.set(
+            token, forKey: "BearerToken")
+        guard isSucces else {
+            print("Ошибка")
+            return
         }
-        set {
-            UserDefaults.standard.set(newValue, forKey: tokenKey)
-        }
+    }
+    func getBearerToken() -> String? {
+        let token: String? = KeychainWrapper.standard.string(
+            forKey: "BearerToken")
+        return token
+    }
+
+    func removeBearerToken() {
+        let _: Bool = KeychainWrapper.standard.removeObject(
+            forKey: "BearerToken")
     }
 }
