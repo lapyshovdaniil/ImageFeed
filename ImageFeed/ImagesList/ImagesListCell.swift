@@ -6,9 +6,15 @@
 //
 
 import UIKit
- class ImagesListCell: UITableViewCell {
-     @IBOutlet weak var ImageCell: UIImageView!
-     @IBOutlet weak var LikeButton: UIButton!
-     @IBOutlet weak var DateLabel: UILabel!
-     static let reuseIdentifier = "ImagesListCell"
+final class ImagesListCell: UITableViewCell {
+    
+    // MARK: - @IBOutlet properties
+    
+    @IBOutlet weak var imageCell: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    // MARK: - Static properties
+    
+    static let reuseIdentifier = "ImagesListCell"
 }

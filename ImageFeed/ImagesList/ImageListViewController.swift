@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ImageListViewController: UIViewController {
-private let showSingleImageSegueIdentifier = "ShowSingleImage"
+final class ImageListViewController: UIViewController {
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let photosName : [String] = Array(0..<20).map{"\($0)"}
-
+    
     @IBOutlet private var tableView: UITableView!
     
     private lazy var dateFormatter: DateFormatter = {
@@ -25,9 +25,7 @@ private let showSingleImageSegueIdentifier = "ShowSingleImage"
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource  = self
-        tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        // Do any additional setup after loading the view.
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
@@ -43,18 +41,18 @@ private let showSingleImageSegueIdentifier = "ShowSingleImage"
             super.prepare(for: segue, sender: sender)
         }
     }
-   
+    
 }
 extension ImageListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath){
+    private func configCell(for cell: ImagesListCell, with indexPath: IndexPath){
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
         }
-        cell.ImageCell.image = image
-        cell.DateLabel.text = dateFormatter.string(from: Date())
+        cell.imageCell.image = image
+        cell.dateLabel.text = dateFormatter.string(from: Date())
         let isLike = indexPath.row % 2 == 0
         let isLikeImage = isLike ? UIImage(named: "Like_ON") : UIImage(named: "Like_OFF")
-        cell.LikeButton.setImage(isLikeImage, for: .normal)
+        cell.likeButton.setImage(isLikeImage, for: .normal)
     }
 }
 extension ImageListViewController: UITableViewDelegate {

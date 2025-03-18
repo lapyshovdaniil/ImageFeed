@@ -7,7 +7,8 @@
 
 import UIKit
 final class SignleImageViewController: UIViewController {
-   var image: UIImage? {
+    
+    var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
             imageView.image = image
@@ -16,20 +17,22 @@ final class SignleImageViewController: UIViewController {
         }
     }
     
+    // MARK: - @IBAction properties
+    
     @IBAction func didTapShareButton(_ sender: UIButton) {
-        print("hi")
-        guard let image else { print("1")
+        guard let image else {
             return }
         let activiryViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         present(activiryViewController, animated: true, completion: nil)
     }
-    
-    @IBOutlet weak var didTapShareButton: UIButton!
     @IBAction func didTapBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @IBOutlet weak var tapBackButton: UIButton!
     
+    // MARK: - @IBOutlet properties
+    
+    @IBOutlet weak var tapBackButton: UIButton!
+    @IBOutlet weak var didTapShareButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -61,30 +64,30 @@ final class SignleImageViewController: UIViewController {
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
-
+    
 }
 extension SignleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-       return imageView
+        return imageView
     }
-  /*  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollView.setContentOffset(.zero, animated: true)
-    }
-   */
+    /*  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+     scrollView.setContentOffset(.zero, animated: true)
+     }
+     */
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-          guard let view else { return }
-          
-          let visibleRectSize = scrollView.bounds.size
-          let realSize = view.frame.size
-          
-          let horizontalInset = max(0, (visibleRectSize.width - realSize.width) / 2)
-          let verticalInset = max(0, (visibleRectSize.height - realSize.height) / 2)
-          
-          scrollView.contentInset = UIEdgeInsets(
-              top: verticalInset,
-              left: horizontalInset,
-              bottom: verticalInset,
-              right: horizontalInset)
-      }
+        guard let view else { return }
+        
+        let visibleRectSize = scrollView.bounds.size
+        let realSize = view.frame.size
+        
+        let horizontalInset = max(0, (visibleRectSize.width - realSize.width) / 2)
+        let verticalInset = max(0, (visibleRectSize.height - realSize.height) / 2)
+        
+        scrollView.contentInset = UIEdgeInsets(
+            top: verticalInset,
+            left: horizontalInset,
+            bottom: verticalInset,
+            right: horizontalInset)
+    }
 }
 
