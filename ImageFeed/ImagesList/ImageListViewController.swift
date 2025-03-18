@@ -10,23 +10,23 @@ import Kingfisher
 
 final class ImageListViewController: UIViewController {
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
-
-
+    
+    
     private let imagesListService = ImagesListService.shared
     private var ImagesListServiceObserver: NSObjectProtocol?
     
     @IBOutlet private var tableView: UITableView!
-
+    
     var photos: [Photo] = []
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-        formatter.dateFormat = "dd MMMM y г."
+        formatter.dateFormat = "dd MMMM y"
         return formatter
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -48,7 +48,7 @@ final class ImageListViewController: UIViewController {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
                 let viewController = segue.destination
-                    as? SignleImageViewController,
+                    as? SingleImageViewController,
                 let indexPath = sender as? IndexPath
             else {
                 assertionFailure("Invalid segue destination")
@@ -60,7 +60,7 @@ final class ImageListViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
-
+    
     private func updateTableViewAnimated(){
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
@@ -86,13 +86,18 @@ extension ImageListViewController {
         let photo = photos[indexPath.row]
         if let imageURL = URL(string: photo.thumbImageURL) {
             cell.imageCell.kf.indicatorType = .activity
-            cell.imageCell.kf.setImage(with: imageURL, placeholder: UIImage(named: "Stub_placeholder")) {result in
+            cell.imageCell.kf.setImage(with: imageURL, placeholder: UIImage(named: "Stub_placeholder")) { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case .success(let value):
-                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                      print("Image loaded: \(value.image)")
-                  case .failure(let error):
-                      print("Error loading image: \(error)")
+                    if cell.imageCell.image != value.image {
+                        cell.imageCell.image = value.image
+                        DispatchQueue.main.async {
+                            self.tableView.reloadRows(at: [indexPath], with: .none)
+                        }
+                    }
+                case .failure(let error):
+                    print("Error loading image: \(error)")
                 }
             }
         } else {
@@ -114,30 +119,30 @@ extension ImageListViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView, heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-            let photo = photos[indexPath.row]
-            let imageWidth = photo.size.width
-            let imageHeight = photo.size.height
-            guard imageWidth > 0 && imageHeight > 0 else {
-                return 100
-            }
-            let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-            let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-            let scale = imageViewWidth / imageWidth
-            let cellHeight = imageHeight * scale + imageInsets.top + imageInsets.bottom
-            return cellHeight
+        let photo = photos[indexPath.row]
+        let imageWidth = photo.size.width
+        let imageHeight = photo.size.height
+        guard imageWidth > 0 && imageHeight > 0 else {
+            return 100
+        }
+        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
+        let scale = imageViewWidth / imageWidth
+        let cellHeight = imageHeight * scale + imageInsets.top + imageInsets.bottom
+        return cellHeight
     }
 }
 
 extension ImageListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-        -> Int
+    -> Int
     {
         print(photos.count)
         return photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell
+    -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
@@ -151,10 +156,10 @@ extension ImageListViewController: UITableViewDataSource {
 }
 extension ImageListViewController {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if indexPath.row == photos.count - 1 {
-                imagesListService.fetchPhotosNextPage()
-            }
+        if indexPath.row == photos.count - 1 {
+            imagesListService.fetchPhotosNextPage()
         }
+    }
 }
 extension ImageListViewController: ImageListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
@@ -163,14 +168,15 @@ extension ImageListViewController: ImageListCellDelegate {
         print("Текущее состояние лайка у фото \(photo.id): \(photo.isLiked)")
         let newLikeState = !photo.isLiked
         UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo.id, isLike: newLikeState) { result in
+        imagesListService.changeLike(photoId: photo.id, isLike: newLikeState) { [weak self] result in
+            guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     self.photos = self.imagesListService.photos
                     cell.setIsLike(isLiked: self.photos[indexPath.row].isLiked)
                     UIBlockingProgressHUD.dismiss()
-                   // Обновляем UI
+                    // Обновляем UI
                 case .failure(let error):
                     UIBlockingProgressHUD.dismiss()
                     print("Ошибка изменения лайка: \(error)")

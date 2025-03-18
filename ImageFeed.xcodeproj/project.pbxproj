@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		751AD7E22D365BFE008713BA /* SignleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751AD7E12D365BFE008713BA /* SignleImageViewController.swift */; };
+		751AD7E22D365BFE008713BA /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751AD7E12D365BFE008713BA /* SingleImageViewController.swift */; };
 		751E781D2D64B07000B07B86 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 751E781C2D64B07000B07B86 /* ProgressHUD */; };
 		75BBE0CE2D80359700D311B9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBE0CD2D80358200D311B9 /* Photos.swift */; };
 		75BBE0D02D80365200D311B9 /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBE0CF2D80364300D311B9 /* PhotoResult.swift */; };
@@ -41,7 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		751AD7E12D365BFE008713BA /* SignleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignleImageViewController.swift; sourceTree = "<group>"; };
+		751AD7E12D365BFE008713BA /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		75BBE0CD2D80358200D311B9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		75BBE0CF2D80364300D311B9 /* PhotoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResult.swift; sourceTree = "<group>"; };
 		75BBE0D12D80402B00D311B9 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		75C7CC892D5D0FB500B397EB /* SingleImageViewController */ = {
 			isa = PBXGroup;
 			children = (
-				751AD7E12D365BFE008713BA /* SignleImageViewController.swift */,
+				751AD7E12D365BFE008713BA /* SingleImageViewController.swift */,
 			);
 			path = SingleImageViewController;
 			sourceTree = "<group>";
@@ -307,7 +307,7 @@
 				75D007C22D19EFBD00E84EB9 /* ImagesListCell.swift in Sources */,
 				75DDCB662D6CC3A700AFCDBF /* ProfileService.swift in Sources */,
 				75C7CC7A2D5778E600B397EB /* OAuthTokenResponseBody.swift in Sources */,
-				751AD7E22D365BFE008713BA /* SignleImageViewController.swift in Sources */,
+				751AD7E22D365BFE008713BA /* SingleImageViewController.swift in Sources */,
 				75C7CC822D5A97AE00B397EB /* URLsession+Data.swift in Sources */,
 				75BBE0D02D80365200D311B9 /* PhotoResult.swift in Sources */,
 				75C7CC842D5B916A00B397EB /* SplashViewController.swift in Sources */,

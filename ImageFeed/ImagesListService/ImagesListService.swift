@@ -8,6 +8,11 @@ import Foundation
 
 final class ImagesListService {
     
+    enum HttpMetods {
+        static let post = "POST"
+        static let delete = "DELETE"
+    }
+    
     static let shared = ImagesListService()
     private init() {}
     
@@ -46,6 +51,23 @@ final class ImagesListService {
         print(request)
         return request
     }
+    private func deleteAndWriteLikeRequest(photoId: String, isLike: Bool) -> URLRequest? {
+        guard let defaultBaseURL = Constants.defaultBaseURL else {
+            print("Invalid URL")
+            assertionFailure("Failed to create URL")
+            return nil
+        }
+        let endPoint = "photos/\(photoId)/like"
+        let fullURL = defaultBaseURL.appendingPathComponent(endPoint)
+        var request = URLRequest(url: fullURL)
+        request.httpMethod = isLike ? HttpMetods.post : HttpMetods.delete
+            guard let token = tokenStorage.getBearerToken() else {
+            print("No token found")
+            return nil
+        }
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
+    }
     
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
@@ -64,8 +86,6 @@ final class ImagesListService {
             switch result {
             case .success(let data):
                 let photosJson = data.map { $0.asPhoto }
-                
-                DispatchQueue.main.async {
                     let newPhotos = photosJson.filter { newPhoto in
                         !self.photos.contains(where: { $0.id == newPhoto.id })
                     }
@@ -76,7 +96,6 @@ final class ImagesListService {
                             name: ImagesListService.didChangeNotification,
                             object: self, userInfo: ["Photos": newPhotos])
                     }
-                }
             case .failure(let error):
                 print("Ошибка! Неудалось получить данные: \(error)")
             }
@@ -126,22 +145,5 @@ final class ImagesListService {
             }
         }
         task.resume()
-    }
-    private func deleteAndWriteLikeRequest(photoId: String, isLike: Bool) -> URLRequest? {
-        guard let defaultBaseURL = Constants.defaultBaseURL else {
-            print("Invalid URL")
-            assertionFailure("Failed to create URL")
-            return nil
-        }
-        let endPoint = "photos/\(photoId)/like"
-        let fullURL = defaultBaseURL.appendingPathComponent(endPoint)
-        var request = URLRequest(url: fullURL)
-        request.httpMethod = isLike ? "POST" : "DELETE"
-            guard let token = tokenStorage.getBearerToken() else {
-            print("No token found")
-            return nil
-        }
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        return request
     }
 }

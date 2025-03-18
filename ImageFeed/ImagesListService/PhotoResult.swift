@@ -12,10 +12,10 @@ struct PhotoResult: Decodable {
     let height: Int
     let createdAt: String
     let description: String?
-    let urls: URLs
+    let urls: UrlsResult
     let likedByUser: Bool
 
-    struct URLs: Decodable {
+    struct UrlsResult: Decodable {
         let regular: String
         let thumb: String
         let full: String
@@ -55,15 +55,15 @@ extension PhotoResult {
     }()
 
     var asPhoto: Photo {
-        return Photo(
+        Photo(
             id: self.id,
-            size: CGSize(width: self.width, height: self.height),
-            createdAt: PhotoResult.dateFormatter.date(from: self.createdAt),
-            welcomeDescription: self.description,
-            thumbImageURL: self.urls.thumb,
-            largeImageURL: self.urls.regular,
-            fullImageUrl: self.urls.full,
-            isLiked: self.likedByUser
+            size: CGSize(width: width, height: height),
+            createdAt: PhotoResult.dateFormatter.date(from: createdAt),
+            welcomeDescription: description,
+            thumbImageURL: urls.thumb,
+            largeImageURL: urls.regular,
+            fullImageUrl: urls.full,
+            isLiked: likedByUser
         )
     }
 }

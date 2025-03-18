@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SignleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController {
 
     var imageURL: String?
     
@@ -49,9 +49,6 @@ final class SignleImageViewController: UIViewController {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.5
         configScrollView()
-//        imageView.image = image
-
-//        rescaleAndCenterImageInScrollView(image: image)
     }
     private func loadImage(imageURL: String) {
         if let imageURL = URL(string: imageURL) {
@@ -63,8 +60,8 @@ final class SignleImageViewController: UIViewController {
                 
                 switch result {
                 case .success(let imageResult):
-                    self.imageView.image = imageResult.image // Убеждаемся, что картинка загружена
-                    self.rescaleAndCenterImageInScrollView(image: imageResult.image) // Затем подгоняем размер
+                    self.imageView.image = imageResult.image
+                    self.rescaleAndCenterImageInScrollView(image: imageResult.image) 
                 case .failure:
                     self.showError()
                 }
@@ -108,7 +105,7 @@ final class SignleImageViewController: UIViewController {
     }
 
 }
-extension SignleImageViewController: UIScrollViewDelegate {
+extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }

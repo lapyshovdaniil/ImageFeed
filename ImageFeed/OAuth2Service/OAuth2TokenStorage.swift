@@ -9,10 +9,13 @@ import Foundation
 import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
+    enum UserDefaultsKeys {
+        static let bearerToken = "BearerToken"
+    }
 
     func saveBearerToken(token: String) {
         let isSucces = KeychainWrapper.standard.set(
-            token, forKey: "BearerToken")
+            token, forKey: UserDefaultsKeys.bearerToken)
         guard isSucces else {
             print("Ошибка")
             return
@@ -20,12 +23,12 @@ final class OAuth2TokenStorage {
     }
     func getBearerToken() -> String? {
         let token: String? = KeychainWrapper.standard.string(
-            forKey: "BearerToken")
+            forKey: UserDefaultsKeys.bearerToken)
         return token
     }
 
     func removeBearerToken() {
         let _: Bool = KeychainWrapper.standard.removeObject(
-            forKey: "BearerToken")
+            forKey: UserDefaultsKeys.bearerToken)
     }
 }

@@ -226,10 +226,10 @@
             </objects>
             <point key="canvasLocation" x="79.906542056074755" y="-746.43628509719224"/>
         </scene>
-        <!--Signle Image View Controller-->
+        <!--Single Image View Controller-->
         <scene sceneID="g2G-6R-QH5">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="ePU-6L-Zmb" customClass="SignleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="ePU-6L-Zmb" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QXh-Dq-7d2">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

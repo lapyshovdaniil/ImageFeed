@@ -9,13 +9,17 @@ import WebKit
 
 final class ProfileLogoutService {
     
+    enum UserDefaultsKeys {
+        static let bearerToken = "BearerToken"
+    }
+    
    static let shared = ProfileLogoutService()
    private init() {}
     
     private let imageListService = ImagesListService.shared
     private let profileImageService = ProfileImageService.shared
     private let profileService = ProfileService.shared
-    private let OAuthstorage = OAuth2TokenStorage()
+    private let oAuthstorage = OAuth2TokenStorage()
 
    func logout() {
        cleanCookies()
@@ -32,8 +36,8 @@ final class ProfileLogoutService {
       }
    }
     private func cleanProfile() {
-        UserDefaults.standard.removeObject(forKey: "BearerToken")
-        OAuthstorage.removeBearerToken()
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.bearerToken)
+        oAuthstorage.removeBearerToken()
         imageListService.clear()
         profileImageService.clear()
         profileService.clear()

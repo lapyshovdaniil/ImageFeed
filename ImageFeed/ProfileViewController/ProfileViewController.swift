@@ -119,17 +119,13 @@ final class ProfileViewController: UIViewController {
         profilImage.kf.setImage(
             with: imageURL, placeholder: UIImage(named: "placeholder"))
     }
-    @objc func showAlert() {
+    @objc private func showAlert() {
            let alert = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Да", style: .cancel, handler: { _ in
                self.profileLogoutService.logout()
                UIApplication.shared.windows.first?.rootViewController = SplashViewController()
            }))
-           
-           // Добавляем действие "Нет"
         alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
-           
-           // Показываем алерт
            self.present(alert, animated: true, completion: nil)
        }
 }
