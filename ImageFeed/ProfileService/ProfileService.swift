@@ -10,10 +10,8 @@ import UIKit
 final class ProfileService {
 
     static let shared = ProfileService()
-    private init() {}
-    
     private let storage = OAuth2TokenStorage()
-   
+    private init() {}
 
     private(set) var profile: ProfileModel?
     private var task: URLSessionTask?
@@ -34,10 +32,6 @@ final class ProfileService {
 
     private func updateProfileDetails(newProfile: ProfileModel) {
         self.profile = newProfile
-    }
-    
-    func clear() {
-        self.profile = nil
     }
 
     func fetchProfile(

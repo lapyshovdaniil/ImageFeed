@@ -12,11 +12,9 @@ final class ProfileImageService {
         rawValue: "ProfileImageProviderDidChange")
 
     private(set) var avatarURL: String?
-
     private var task: URLSessionTask?
 
     private let tokenStorage = OAuth2TokenStorage()
-    
     static let shared = ProfileImageService()
     private init() {}
 
@@ -37,9 +35,7 @@ final class ProfileImageService {
         return request
     }
     
-    func clear() {
-        self.avatarURL = nil
-    }
+    
     
     private func updateProfileDetails(newProfileImage: String) {
         self.avatarURL = newProfileImage
