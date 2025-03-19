@@ -11,7 +11,9 @@ import UIKit
 final class ProfileViewController: UIViewController {
 
     private var profileImageServiceObserver: NSObjectProtocol?
-
+  
+    private let profileLogoutService = ProfileLogoutService.shared
+    
     private let fullNameLable = UILabel()
     private let nikNameLable = UILabel()
     private let bioLable = UILabel()
@@ -37,7 +39,6 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
         // MARK: - PROFILEIMAGE
 
-        //        profilImage.image = UIImage(named: "avatar")
         profilImage.layer.cornerRadius = 35
         profilImage.clipsToBounds = true
         view.addSubview(profilImage)
@@ -50,7 +51,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(exitButtom)
         exitButtom.translatesAutoresizingMaskIntoConstraints = false
         exitButtom.addTarget(
-            self, action: #selector(exitButtonTapped), for: .touchUpInside)
+            self, action: #selector(showAlert), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
             profilImage.heightAnchor.constraint(equalToConstant: 70),
@@ -70,19 +71,19 @@ final class ProfileViewController: UIViewController {
 
         // MARK: - FULLLABLE
 
-        //        fullNameLable.text = "Екатерина Новикова"
+
         fullNameLable.font = UIFont.boldSystemFont(ofSize: 23)
         fullNameLable.textColor = .white
 
         // MARK: - NICKNAMELABLE
 
-        //        nikNameLable.text = "@ekaterina_nov"
+
         nikNameLable.font = UIFont.systemFont(ofSize: 13)
         nikNameLable.textColor = .gray
 
         // MARK: - NICKNAMELABLE
 
-        //        bioLable.text = "Hello, world!"
+
         bioLable.font = UIFont.systemFont(ofSize: 13)
         bioLable.textColor = .white
 
@@ -118,9 +119,13 @@ final class ProfileViewController: UIViewController {
         profilImage.kf.setImage(
             with: imageURL, placeholder: UIImage(named: "placeholder"))
     }
-    @objc
-    private func exitButtonTapped() {
-        removeData.removeBearerToken()
-        print("Logout")
-    }
+    @objc private func showAlert() {
+           let alert = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Да", style: .cancel, handler: { _ in
+               self.profileLogoutService.logout()
+               UIApplication.shared.windows.first?.rootViewController = SplashViewController()
+           }))
+        alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
+           self.present(alert, animated: true, completion: nil)
+       }
 }
