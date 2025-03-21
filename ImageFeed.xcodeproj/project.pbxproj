@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		751AD7E22D365BFE008713BA /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751AD7E12D365BFE008713BA /* SingleImageViewController.swift */; };
 		751E781D2D64B07000B07B86 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 751E781C2D64B07000B07B86 /* ProgressHUD */; };
+		755DB2E52D8DA6B300CFEB8B /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755DB2E42D8DA6A700CFEB8B /* WebViewPresenter.swift */; };
 		75BBE0CE2D80359700D311B9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBE0CD2D80358200D311B9 /* Photos.swift */; };
 		75BBE0D02D80365200D311B9 /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBE0CF2D80364300D311B9 /* PhotoResult.swift */; };
 		75BBE0D22D80402C00D311B9 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBE0D12D80402B00D311B9 /* ImagesListService.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		751AD7E12D365BFE008713BA /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		755DB2E42D8DA6A700CFEB8B /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		75BBE0CD2D80358200D311B9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		75BBE0CF2D80364300D311B9 /* PhotoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResult.swift; sourceTree = "<group>"; };
 		75BBE0D12D80402B00D311B9 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		75C7CC6C2D4D004900B397EB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				755DB2E42D8DA6A700CFEB8B /* WebViewPresenter.swift */,
 				75DDCB182D6C7BFD00AFCDBF /* UIBlockingProgressHUD.swift */,
 				75C7CC6D2D4D005E00B397EB /* WebViewViewController.swift */,
 				75C7CC6F2D4D0BEB00B397EB /* AuthViewController.swift */,
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				755DB2E52D8DA6B300CFEB8B /* WebViewPresenter.swift in Sources */,
 				75D007922D1584B100E84EB9 /* ImageListViewController.swift in Sources */,
 				75D007C22D19EFBD00E84EB9 /* ImagesListCell.swift in Sources */,
 				75DDCB662D6CC3A700AFCDBF /* ProfileService.swift in Sources */,

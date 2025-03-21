@@ -8,15 +8,24 @@
 import UIKit
 import WebKit
 
+
+public protocol WebViewViewControllerProtocol: AnyObject {
+    var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
+}
+
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(
         _ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
 }
 
-final class WebViewViewController: UIViewController {
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
+
 
     weak var delegate: WebViewViewControllerDelegate?
+    
+    var presenter: WebViewPresenterProtocol?
 
     // MARK: - @IBOutlet properties
 
@@ -28,8 +37,8 @@ final class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
-        loadAuthView()
-
+        presenter?.viewDidLoad()
+        updateProgress()
         estimatedProgressObservation = webView.observe(
             \.estimatedProgress, options: [],
             changeHandler: { [weak self] _, _ in
@@ -37,31 +46,12 @@ final class WebViewViewController: UIViewController {
                 self.updateProgress()
             })
     }
+    func load(request: URLRequest) {
+        webView.load(request)
+    }
 
     @IBAction func didTapBackButton(_ sender: Any) {
         delegate?.webViewViewControllerDidCancel(self)
-    }
-
-    private func loadAuthView() {
-        guard
-            var urlComponents = URLComponents(
-                string: Constants.unsplashAuthorizeURLString)
-        else {
-            return
-        }
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.accessScope),
-        ]
-        guard let url = urlComponents.url else {
-            print("Ошибка при создание URL")
-            return
-        }
-        let request = URLRequest(url: url)
-        print(request)
-        webView.load(request)
     }
 
     override func viewWillAppear(_ animated: Bool) {
