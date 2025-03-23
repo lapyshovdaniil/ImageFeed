@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 final class ProfileService {
 
     static let shared = ProfileService()
@@ -15,7 +17,7 @@ final class ProfileService {
     private let storage = OAuth2TokenStorage()
    
 
-    private(set) var profile: ProfileModel?
+    var profile: ProfileModel?
     private var task: URLSessionTask?
 
     private func makeProfileRequest(code: String) -> URLRequest? {

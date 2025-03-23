@@ -5,8 +5,13 @@
 //  Created by Даниил Лапышов on 11.03.2025.
 //
 import Foundation
+protocol ImagesListServiceProtocol {
+    var photos: [Photo] { get }
+    func fetchPhotosNextPage()
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void)
+}
 
-final class ImagesListService {
+final class ImagesListService: ImagesListServiceProtocol {
     
     enum HttpMetods {
         static let post = "POST"

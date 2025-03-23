@@ -38,6 +38,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.accessibilityIdentifier = "WebView"
         webView.navigationDelegate = self
         presenter?.viewDidLoad()
 //        estimatedProgressObservation = webView.observe(
