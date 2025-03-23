@@ -7,7 +7,8 @@
 import Foundation
 import WebKit
 
-final class ProfileLogoutService {
+
+final class ProfileLogoutService{
     
     enum UserDefaultsKeys {
         static let bearerToken = "BearerToken"

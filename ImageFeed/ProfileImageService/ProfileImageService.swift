@@ -6,12 +6,14 @@
 //
 import UIKit
 
+
+
 final class ProfileImageService {
 
     static let didChangeNotification = Notification.Name(
         rawValue: "ProfileImageProviderDidChange")
 
-    private(set) var avatarURL: String?
+    var avatarURL: String?
 
     private var task: URLSessionTask?
 
